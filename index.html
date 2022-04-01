@@ -22,25 +22,36 @@
         <!-- fascia con inserimento testo e bottone -->
         <div class="container d-flex justify-content-center align-items-center my-3">
 
-            <input type="text" class="me-3 form-control" placeholder="Scrivi Nuovo To Do">
-            <button type="button" class="btn btn-info">Aggiungi</button>
+            <input 
+              type="text" 
+              class="me-3 form-control" 
+              placeholder="Scrivi Nuovo To Do"
+              v-model="newTodo"
+              @keyup.enter="addTodo"
+            >
+            <button type="button" class="btn btn-info" @click="addTodo">Aggiungi</button>
 
         </div>
 
         <!-- lista di cose -->
         <div class="container mt-5 rounded-3 bg-custom p-5">
             
-            <div class="w-50 mx-auto">
+            <div class="w-50 mx-auto" v-if="todos.length > 0" >
                 <ul>
-                    <li class="d-flex justify-content-between align-items-center bg-light p-2 rounded-3 mb-3">
+                    <li class="d-flex justify-content-between align-items-center bg-light p-2 rounded-3 mb-3"
+                    v-for="(todo, index) in todos" :key="index">
 
-                        <span>Fare la spesa!</span>
+                        <span :class="(todo.done == true) ? 'done' : '' " @click="done(todo)">
+                            {{todo.text}}
+                        </span>
 
-                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        <i class="fa-solid fa-circle-xmark text-danger" @click="removeTodo(index)"></i>
 
                     </li>
                 </ul>
             </div>
+
+            <h2 v-else>Non ci sono voci in lista</h2>
 
         </div>
 

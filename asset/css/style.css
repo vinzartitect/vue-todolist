@@ -8,3 +8,7 @@
 .bg-custom {
     background-color: rgb(13, 202, 240);
 }
+
+.done {
+    text-decoration: line-through;
+}
