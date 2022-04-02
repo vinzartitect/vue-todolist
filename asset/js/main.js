@@ -50,16 +50,34 @@ var app = new Vue (
                 this.todos.splice(todoIndex,1);
             },
 
-            addTodo: function(){
-                let objTodo = {
-                    text: this.newTodo,
-                    done: false,
-                }
+            addTodo: function(){                
 
-                if (!this.newTodo == ''){
+                if ( this.newTodo != '' ){
 
-                    this.todos.push(objTodo);
-                    this.newTodo = '';
+                    let check = false;
+
+                    this.todos.forEach(element => {
+                        if ( this.newTodo.toLowerCase() === element.text.toLowerCase() ){
+                            check = true;                       
+                        }                        
+                    });
+
+                    console.log(check);
+
+                    if ( check == false ){
+
+                        let objTodo = {
+                            text: this.newTodo,
+                            done: false,
+                        }
+
+                        this.todos.push(objTodo);
+                        this.newTodo = '';
+
+                    } else {
+                        alert('elemento gia esistente!');
+                    }
+                   
                 }
             },
 
