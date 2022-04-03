@@ -46,17 +46,23 @@ var app = new Vue (
 
         methods: {
 
+            // funzione per rimuovere todo cliccando la x
             removeTodo: function(todoIndex){
                 this.todos.splice(todoIndex,1);
             },
 
-            addTodo: function(){                
-
+            // funzione per aggiungere nuovo todo
+            addTodo: function(){ 
+                
+                // se input non è vuoto
                 if ( this.newTodo != '' ){
 
+                    // creiamo una variabile check da verificare
                     let check = false;
 
+                    // ciclo foreach in cui verifico se esiste gia un todo
                     this.todos.forEach(element => {
+                        // se il nuovo todo esiste gia, il check è true
                         if ( this.newTodo.toLowerCase() === element.text.toLowerCase() ){
                             check = true;                       
                         }                        
@@ -64,23 +70,28 @@ var app = new Vue (
 
                     console.log(check);
 
+                    // se il check verifica è falso, cioè il nuovo todo non esiste nell array todos
                     if ( check == false ){
 
+                        // creiamo una variabile contenente l'oggetto col nuovo todo
                         let objTodo = {
                             text: this.newTodo,
                             done: false,
                         }
 
+                        //pusho l'oggetto del nuovo todo dentro all array todos
                         this.todos.push(objTodo);
                         this.newTodo = '';
 
                     } else {
+                        // se il check verifica è true, esce un alert
                         alert('elemento gia esistente!');
                     }
                    
                 }
             },
 
+            // funzione per barrare il todo presente nella lista
             done: function(element){
                 if(element.done == true){
                     element.done = false
